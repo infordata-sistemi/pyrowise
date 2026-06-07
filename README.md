@@ -8,6 +8,12 @@ This repository is the **public scientific documentation** for PyroWISE. It desc
 
 **PyroWISE is a commercial product of Infordata Sistemi Srl SB.** The open-vs-commercial boundary is explicit and in writing — see [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
 
+> **TerraWise project family.** Three repositories, three audiences:
+>
+> - **[`terrawise`](https://github.com/infordata-sistemi/terrawise)** — the product umbrella · architecture · modules · roadmap
+> - **[`karst-firewall-50`](https://github.com/infordata-sistemi/karst-firewall-50)** — the first deployment · EU Interreg public docs
+> - **[`pyrowise`](https://github.com/infordata-sistemi/pyrowise)** — the simulation engine · open scientific docs &nbsp;← *you are here*
+
 ---
 
 ## What PyroWISE is
