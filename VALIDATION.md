@@ -44,11 +44,21 @@ The validation protocol itself is open:
 
 This protocol is reproducible by any third party with the (open) benchmark dataset and a comparable simulator.
 
-## Published numbers
+## Published numbers — current
 
-*To be released with the companion publication.*
+The numbers below are the ones we are comfortable publishing today as a snapshot of the validation work. The companion publication will give the full distributions (median / quartiles / worst-case), the held-out methodology in detail, and the failure-mode analysis.
 
-Until the companion paper is out, no operational IoU number for PyroWISE is published here, by design — to avoid being cherry-picked or quoted out of the validation-set context. The published numbers will include the full distribution, the held-out methodology, and explicit failure-mode analysis.
+| Cohort | Cohort-mean IoU | Method | Honesty boundary |
+|---|---|---|---|
+| **Karst K04 cross-border** (IT / FVG / SLO) | **0.39 – 0.41** | CMA-ES calibrated priors, replayed against the registry cohort with historical weather and observed perimeters | **Structural calibration ceiling**, not optimiser ceiling. A single global prior cannot do better; the next published lever is a regime-aware priors router (see [README §5](README.md#scientific-findings--current-highlights)). |
+| **FVG Karst-plateau** | **0.41** | 3-event CMA on a 10 m operational fuel mosaic over the SE Karst plateau | Plateau scope only; alpine FVG deferred (no anemometer coverage on the Carnic stations — see README §7). |
+| **No-calibration free-burn baseline** *(transferability stress only)* | ~0.25 – 0.27 | Same kernel, no calibrated priors, used only to put PyroWISE and external comparators on the same un-tuned footing | This is **not** a production accuracy number. A no-cal free-burn model over-spreads by design; reporting it puts external comparators on the same footing without claiming it as PyroWISE's accuracy. |
+| **External-comparator scorecard — Dixie (US-CA 2021)** | 0.27 (PyroWISE no-cal) vs 0.25 (Cell2Fire, bounded 120 m / 20 d) | Same observed perimeter (WFIGS / MTBS), same fuel crosswalk, same weather, same metric code path | Cell2Fire side is a **bounded run** — full-resolution full-horizon Cell2Fire replay of Dixie is computationally infeasible (engine-side fixed-array overflow ×12). Published transparently as bounded transferability evidence, **not** a full-fidelity comparison. |
+| **External-comparator scorecard — CFSDS Nadina (CA-BC 2018)** | 0.0 (PyroWISE no-cal, mask-aware) vs 0.03 (Cell2Fire) | Same setup | Both engines at low absolute fidelity — transferability evidence, not production. |
+
+**What practitioners should take away.** The calibrated cohort IoU (≈ 0.39 – 0.41) is the production-relevant accuracy. The no-cal baseline IoU (≈ 0.25 – 0.27) is for external-comparator setups, not a production claim. The current ceiling is structural (event-regime mixture), not an optimiser limit; that's an honest scientific finding, not a marketing softening.
+
+Full distribution / per-event reporting will land with the companion publication; see [PUBLICATIONS.md](PUBLICATIONS.md).
 
 ## Commercial scope
 
