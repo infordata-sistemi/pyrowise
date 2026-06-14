@@ -26,7 +26,7 @@ What it gives an operator *and* a scientist:
 - **Calibrated Karst envelope** for the cross-border region with versioned priors and a single resolver entry point so production routing is auditable and reproducible.
 - **Cross-border data layer** — bilateral DTM and CHM, infrastructure (roads, railways, firebreaks), dry-stone-wall cadastres (FVG CTRN + SLO RUBIN + OSM), hydrography with barrier tagging, conservation overlays with a restoration traffic-light policy, and a canonical 1990–2026 cross-border fire registry — all served from one AOI catalogue contract.
 - **Operator HTTP API** with async simulation, ensemble fan-out, live Server-Sent-Events perimeter streaming, time-to-impact for points / lines / polygons, structured error codes and Prometheus metrics. Designed to drop in behind any HTTP + GeoJSON / PMTiles / COG client (Cesium, Leaflet, QGIS workflows, civil-protection cockpits).
-- **Decision-support surfaces** that wrap the kernel without modifying it — OSINT bus, cross-source ignition correlator, wildfire-smoke PM2.5 dispersion COGs (currently `UNCALIBRATED`, see below), sensor ingest (e-nose / LDT / LoRa). A run with OSINT visible is the **same physics** as a run without it — none of these surfaces silently alters wildfire priors or the kernel.
+- **Decision-support surfaces** that wrap the kernel without modifying it — OSINT bus, cross-source ignition correlator, an active-fire trigger hook (FIRMS detections clustered into per-cluster nowcast proposals), wildfire-smoke PM2.5 dispersion COGs (currently `UNCALIBRATED`, see below), sensor ingest (e-nose / LDT / LoRa) and sensor-network coverage scoring (where the deployed e-nose network can — and cannot — smell a fire, scored on the same wind-shaped demand grid the placement planner uses). A run with OSINT visible is the **same physics** as a run without it — none of these surfaces silently alters wildfire priors or the kernel.
 
 ---
 
@@ -93,6 +93,16 @@ Polygon-only Huygens is dt-stable at small-fire scale but is **dt-sensitive at l
 ### 8. Cross-border canonical fire registry (1990–2026, 6 039 events)
 
 PyroWISE compiles and uses a **canonical IT/SI Karst fire registry** spanning 1990–2026 (~6 000 events), reconciled across the A.R.D.I. FVG archive, the SLO ZGS *gozdni požari* registry, and Copernicus EMS rapid-mapping perimeters. The registry methodology — duplicate resolution, attribute reconciliation, perimeter source ranking, EO-progression tier ladder (Tier 0 → Tier 4) — is itself a publication-relevant infrastructure contribution. A subset of the registry is being prepared for open CC BY 4.0 release alongside the companion publication.
+
+### 9. Dynamic fuel state — the §5 negative result becomes a shipped surface (opt-in)
+
+Findings (4) and (5) argued that the cold-season wind-coupling axis was a **proxy for under-modelled fuel** — error that belongs in a `curing_frac` / dynamic-fuel-state surface, not in a wind multiplier. That surface now exists as an **opt-in run input**. PyroWISE assimilates a per-fuel-class **NDVI anomaly** (today's Sentinel-2 greenness vs a five-year, per-fuel-class seasonal baseline) and converts it — bounded and hindcast-honest — into a per-class **rate-of-spread modulation**, so the same ignition spreads faster across cured August fuel than green May fuel.
+
+The wiring is conservative by design: the modulation is **capped** (≤ ±0.25), **low-sensitivity** (0.15), uses a 21-day freshness window, echoes its provenance and any `degrade` flags in the run manifest, and is **off by default** — a static-fuel run is one flag away. It ships as a methods-open surface (request enum + manifest echo + degrade contract); whether it earns a place as a production *default* is gated behind an **A/B hindcast against the static-fuel baseline** — the next published lever, not yet run at publication time. The assimilation method and the degrade discipline are open; the numeric per-fuel-class thresholds are commercial.
+
+### 10. Event-level provenance correction — two benchmark baselines were input-defect artifacts
+
+A temporal-repair audit of two cross-border benchmark events found that their headline **polygon-kernel baselines were inflated by input defects, not physics**: an ignition point placed ~290 m *outside* the observed perimeter, and a weather schedule drawn from a valley-floor station that misses the plateau Bora that actually drove the run. Re-grounded on corrected inputs (interior-projected ignition + a wind-covered plateau station), one event's celebrated polygon baseline collapses and the **arrival-time kernel matches or beats it**. The lesson is methodological — benchmark fidelity is hostage to input provenance, and an attractive event-level number can be an artifact of the very defect it was fit on — and it is a first-class negative result: it tells external benchmarkers to **audit ignition placement and station representativeness before quoting an event-level IoU**. The calibrated cross-border cohort number (§3) is unchanged; this is an event-level provenance correction, published because the honest negative is the point.
 
 ---
 

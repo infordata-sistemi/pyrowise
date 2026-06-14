@@ -65,6 +65,18 @@ The default optimiser is **CMA-ES** (Hansen 2006), with Nelder-Mead with top-K g
 
 The *methodology* is open — what loss, what optimiser, what calibration line, what audit artefacts (calibration confidence GeoJSON + per-event summary, structured run manifests). The *numeric priors* themselves are commercial: the parameter tables that define the Karst-calibrated production priors are part of the commercial product. The boundary is, again, [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
 
+## Dynamic fuel state — reading today's fuel from space (opt-in)
+
+The fuel table above is, by default, *static* for a given fire. PyroWISE now also accepts an **opt-in dynamic fuel-state input** that lets the simulator burn *today's* fuel rather than a year-old map — the methodological response to the validation finding that the wind-coupling axis was absorbing fuel-side error that belongs in the fuel surface (see [VALIDATION.md](VALIDATION.md) and README §5/§9).
+
+The method, in the open:
+
+1. **Observed greenness.** A per-fuel-class NDVI value is computed from the latest cloud-masked Sentinel-2 pass over the terrain.
+2. **Seasonal baseline.** That value is compared against a *per-fuel-class* "normal greenness" curve built from five years of satellite history, binned into half-month windows — so the question is "is this normal for *this* fuel in *this* fortnight?", not against a global threshold (peak-summer Karst NDVI clusters well below textbook "healthy" values, so a global scale would mislabel healthy Karst vegetation as stressed).
+3. **Anomaly → physical knobs.** The observed-minus-baseline anomaly is converted, **bounded and hindcast-honest**, into the two knobs the kernel already understands — a **curing fraction** for grass/shrub fuels and a **rate-of-spread modulation** for conifer/slash — capped (≤ ±0.25), low-sensitivity (0.15), with a freshness window and explicit `degrade` flags when the satellite or baseline evidence is thin.
+
+It is **off by default** (a static-fuel run is one request flag away) and its provenance is echoed in the run manifest. The assimilation *method* and the `degrade` discipline are open; the numeric per-fuel-class thresholds are part of the commercial calibration. Promotion from opt-in preview to production default is gated behind an A/B hindcast against the static-fuel baseline — not yet run at publication time.
+
 ## What's *not* in this document
 
 By design, this file does not include:

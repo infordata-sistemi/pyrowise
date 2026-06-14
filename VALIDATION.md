@@ -58,6 +58,8 @@ The numbers below are the ones we are comfortable publishing today as a snapshot
 
 **What practitioners should take away.** The calibrated cohort IoU (≈ 0.39 – 0.41) is the production-relevant accuracy. The no-cal baseline IoU (≈ 0.25 – 0.27) is for external-comparator setups, not a production claim. The current ceiling is structural (event-regime mixture), not an optimiser limit; that's an honest scientific finding, not a marketing softening.
 
+**Provenance caveat on event-level numbers (added).** A temporal-repair audit of two cross-border benchmark events found that their *event-level* polygon baselines had been inflated by **input defects** — an ignition point placed ~290 m outside the observed perimeter, and a weather schedule from a valley-floor station that misses the plateau Bora that drove the run. Re-grounded on corrected inputs, one of those polygon baselines collapses and the arrival-time kernel matches or beats it. This does **not** change the calibrated cohort number above (a cohort mean, not a single event); it is an event-level provenance correction, and the methodological takeaway for anyone reproducing the protocol is to **audit ignition placement and station representativeness before quoting a single-event IoU**. See README §10.
+
 Full distribution / per-event reporting will land with the companion publication; see [PUBLICATIONS.md](PUBLICATIONS.md).
 
 ## Commercial scope
