@@ -85,9 +85,8 @@ By design, this file does not include:
 - The mapping from satellite-classified land cover to fuel models.
 - Numerical-method details (timestep, mesh, stability constants).
 - Performance characteristics or scaling.
-- The PyroWISE source code or its API.
 
-Those are part of the commercial product. The open-vs-commercial boundary is in [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
+The engine *source code* itself is open — it lives in the engine repository under **AGPL-3.0**, not in this documentation repo. What stays commercial is the site-specific numeric calibration (the fuel-model parameter tables above) and the operational/scaling internals. The open-vs-commercial boundary is in [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
 
 ## Further reading
 

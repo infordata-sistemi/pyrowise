@@ -4,9 +4,9 @@
 
 PyroWISE is the fire-spread simulator at the heart of the [TerraWise](https://github.com/infordata-sistemi/terrawise) platform. It propagates a fire perimeter on a continuously-updated digital twin of the terrain (fuel × wind × slope × barrier × moisture × topography) and produces operational nowcasts, scenarios and replays — perimeters, ensemble envelopes, arrival-time rasters and per-run audit bundles — that civil-protection teams use for situational awareness, intervention planning, and post-event evidence workflows.
 
-This repository is the **public scientific documentation** for PyroWISE. It describes what the engine does, the canonical methods it builds on, what it can claim (and what it can't), how it is validated, and the boundary between the open science and the commercial product. **The engine itself is not open**; the methods, validation protocol, published findings and citation are.
+This repository is the **public scientific documentation** for PyroWISE. It describes what the engine does, the canonical methods it builds on, what it can claim (and what it can't), how it is validated, and the boundary between what is open and what is commercial. **The engine source is open** — licensed under **AGPL-3.0** (strong network-copyleft, matching the upstream WISE / Prometheus licence) — alongside the methods, validation protocol, published findings and citation. What stays commercial is a *non-copyleft license* of the same engine, the hosted service, and the site-specific numeric calibration tables.
 
-**PyroWISE is a commercial product of Infordata Sistemi Srl SB.** The open-vs-commercial boundary is explicit and in writing — see [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
+**PyroWISE is open-core: AGPL-3.0 engine source, with a commercial license + SaaS from Infordata Sistemi Srl SB.** The open-vs-commercial boundary is explicit and in writing — see [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
 
 > **TerraWise project family.** Three repositories, three audiences:
 >
@@ -205,7 +205,7 @@ See [VALIDATION.md](VALIDATION.md) for the full benchmark protocol: the dataset,
 |---|---|
 | [MODEL.md](MODEL.md) | The science — Rothermel + Huygens + CFFDRS, with citations |
 | [VALIDATION.md](VALIDATION.md) | The open benchmark protocol + the honesty framing |
-| [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md) | **The explicit boundary — methods open, engine commercial** |
+| [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md) | **The explicit boundary — AGPL-3.0 engine + open methods, with a commercial license & SaaS** |
 | [PUBLICATIONS.md](PUBLICATIONS.md) | Companion papers + how to cite |
 | [CITATION.cff](CITATION.cff) | Machine-readable citation metadata |
 
@@ -219,17 +219,19 @@ For academic citation, use the entry in [CITATION.cff](CITATION.cff) (GitHub ren
 
 ## Working with PyroWISE
 
-- **Operationally** — as part of the TerraWise platform (commercial). Contact `sales@infordata.it`.
+- **As open source** — the engine is **AGPL-3.0**. You may self-host and modify it under those terms, including AGPL's network-copyleft obligation to offer your modified source to users you serve it to over a network.
+- **Under a commercial license** — for operators who can't adopt AGPL's copyleft, a non-copyleft commercial license of the same engine is available. Contact `sales@infordata.it`.
+- **Operationally** — as the hosted TerraWise platform (SaaS, with support and site-specific calibration). Contact `sales@infordata.it`.
 - **Scientifically** — open an issue or a PR on this repository to discuss the model, the calibration cohort, the validation protocol, methodology questions, or a paper collaboration.
 - **Independent benchmarking** — the benchmark protocol is open. The IT/SI registry subset is being prepared for an open CC BY 4.0 release; until then, run the protocol on your own dataset and we'd love to compare notes.
 
 ---
 
-## Why the open-vs-commercial split
+## Why open-core
 
-PyroWISE matters most when it is *correct*. Correctness needs the scientific community — peer review, independent validation, paper collaboration, an open benchmark protocol. That is the part we open: the methodology, the protocol, the published findings (including the negative ones), the citation.
+PyroWISE matters most when it is *correct*. Correctness needs the scientific community — peer review, independent validation, paper collaboration, an open benchmark protocol. So the science is open, and so is the engine itself: the source is **AGPL-3.0**, the methodology, the protocol, the published findings (including the negative ones) and the citation are all public.
 
-PyroWISE also matters because someone has to invest in keeping it running, calibrated and trustworthy at operational quality across many sites. That investment is the commercial product — sold to public and private operators of territorial-emergency services — and that is the part we keep closed.
+PyroWISE also matters because someone has to invest in keeping it running, calibrated and trustworthy at operational quality across many sites. That investment is the commercial side — a non-copyleft license for operators who can't adopt AGPL, the hosted service with its SLA and support, and the site-specific numeric calibration tables. The engine *source* stays open; what is sold is the license flexibility, the operations, and the calibration around it.
 
 The boundary table in [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md) makes the split unambiguous, so collaborations don't drift into either grey zone.
 
