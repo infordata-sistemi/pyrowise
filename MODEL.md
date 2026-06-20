@@ -47,6 +47,8 @@ PyroWISE consumes a fused digital twin of the territory:
 | **Infrastructure** | Roads, railways, firebreaks, dry-stone walls as barriers |
 | **Ignition point(s)** | Operator-specified, sensor-triggered, or scenario-defined |
 
+The kernel consumes **only** this fused physical field. Context from the sibling **TerraWise** multi-hazard layer (earthquake / flood / heatwave events) is deliberately **not** a model input — a run may record which TerraWise events an operator considered in a `manifest.terrawise_context` provenance block, but that is audit metadata only and never enters the spread computation.
+
 ## Outputs
 
 | Output | Description |
