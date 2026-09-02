@@ -144,7 +144,7 @@ By design, this file does not include:
 - Numerical-method details (timestep, mesh, stability constants).
 - Performance characteristics or scaling.
 
-The engine *source code* itself is open — it lives in the engine repository under **AGPL-3.0**, not in this documentation repo. What stays commercial is the site-specific numeric calibration (the fuel-model parameter tables above) and the operational/scaling internals. The open-vs-commercial boundary is in [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
+The engine *source code* lives in the engine repository under **AGPL-3.0**, not in this documentation repo — and ⚠ that repository is **not public yet**, so the source is not currently downloadable. What stays commercial is the site-specific numeric calibration (the fuel-model parameter tables above) and the operational/scaling internals. The open-vs-commercial boundary, and the engine-source status, are in [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
 
 ## Further reading
 

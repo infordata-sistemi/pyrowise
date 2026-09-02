@@ -4,9 +4,11 @@
 
 PyroWISE is the fire-spread simulator at the heart of the [TerraWise](https://github.com/infordata-sistemi/terrawise) platform. It propagates a fire perimeter on a continuously-updated digital twin of the terrain (fuel × wind × slope × barrier × moisture × topography) and produces operational nowcasts, scenarios and replays — perimeters, ensemble envelopes, arrival-time rasters and per-run audit bundles — that civil-protection teams use for situational awareness, intervention planning, and post-event evidence workflows.
 
-This repository is the **public scientific documentation** for PyroWISE. It describes what the engine does, the canonical methods it builds on, what it can claim (and what it can't), how it is validated, and the boundary between what is open and what is commercial. **The engine source is open** — licensed under **AGPL-3.0** (strong network-copyleft, matching the upstream WISE / Prometheus licence) — alongside the methods, validation protocol, published findings and citation. What stays commercial is a *non-copyleft license* of the same engine, the hosted service, and the site-specific numeric calibration tables.
+This repository is the **public scientific documentation** for PyroWISE. It describes what the engine does, the canonical methods it builds on, what it can claim (and what it can't), how it is validated, and the boundary between what is open and what is commercial. The methods, validation protocol, published findings and citation are all public — they are what you are reading. The engine itself is licensed **AGPL-3.0** (strong network-copyleft, matching the upstream WISE / Prometheus licence); what stays commercial is a *non-copyleft license* of the same engine, the hosted service, and the site-specific numeric calibration tables.
 
-**PyroWISE is open-core: AGPL-3.0 engine source, with a commercial license + SaaS from Infordata Sistemi Srl SB.** The open-vs-commercial boundary is explicit and in writing — see [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
+**PyroWISE is open-core: an AGPL-3.0 engine, with a commercial license + SaaS from Infordata Sistemi Srl SB.** The open-vs-commercial boundary is explicit and in writing — see [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md).
+
+> ⚠ **The engine repository is not public yet.** The AGPL-3.0 licence is applied and declared, but the source is not currently downloadable — so today this repository is what you can actually obtain. We would rather say that here than let "open-core" be read as "clone it". The status, and what it does and does not commit us to, is in [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md#-current-status-of-the-engine-source--read-this-first).
 
 > **TerraWise project family.** Three repositories, three audiences:
 >
@@ -239,7 +241,7 @@ This section is the equivalent of a paper's *Methods → Data sources* — every
 
 | System | Role | Reference |
 |---|---|---|
-| **WISE / Prometheus** (Canadian Forest Service) | Reference implementation of the CFFDRS science we reimplement. File-boundary external comparator for benchmark events. | [firegrowthmodel.ca/prometheus](https://firegrowthmodel.ca/prometheus/overview_e.php) · [WISE-Developers GitHub](https://github.com/WISE-Developers) |
+| **WISE / Prometheus** (Canadian Forest Service) | Reference implementation of the CFFDRS science we reimplement. File-boundary external comparator for benchmark events. | [firegrowthmodel.ca](https://firegrowthmodel.ca/) · [WISE-Developers GitHub](https://github.com/WISE-Developers) |
 | **Cell2Fire** (Pais et al. 2019) | Stochastic, cell-based comparator. Scored against PyroWISE on Nadina and Dixie. | [github.com/cell2fire/Cell2Fire](https://github.com/cell2fire/Cell2Fire) |
 | **FARSITE / FlamMap / BehavePlus** (USDA / Missoula Fire Sciences Lab) | **Executed file-boundary comparator**, not merely a reference: the pinned FARSITE build is the engine behind the EMSR604 propagator decomposition (finding 11). Also the reference for FBFM40 fuel models and Rothermel. | [firelab.org](https://www.firelab.org/) |
 | **CFFDRS science** (NRCan / Canadian Forest Service) | The peer-reviewed FWI / FBP / Huygens foundations we reimplement. | [github.com/cffdrs](https://github.com/cffdrs) |
@@ -284,9 +286,9 @@ This section is the equivalent of a paper's *Methods → Data sources* — every
 
 ## How PyroWISE plugs into the operator
 
-PyroWISE is the **growth simulator**. It does *not* answer "where is a fire likely to start?" — that's the job of [`kf50-kfwi-api`](https://github.com/infordata-sistemi/kf50-kfwi-api) (the Karst Fire Weather Index ignition + severity service). They are independent: PyroWISE consumes KFWI severity only as a display overlay, never as a calibration input to the wildfire kernel.
+PyroWISE is the **growth simulator**. It does *not* answer "where is a fire likely to start?" — that's the job of `kf50-kfwi-api`, the Karst Fire Weather Index ignition + severity service *(private repository)*. They are independent: PyroWISE consumes KFWI severity only as a display overlay, never as a calibration input to the wildfire kernel.
 
-In the [Karst Firewall 5.0](https://github.com/infordata-sistemi/karst-firewall-50) deployment, the simulator is exposed through the operator cockpit ([`kf50-php`](https://github.com/infordata-sistemi/kf50-php)) with three operational surfaces:
+In the [Karst Firewall 5.0](https://github.com/infordata-sistemi/karst-firewall-50) deployment, the simulator is exposed through the operator cockpit (`kf50-php`, *private repository*) with three operational surfaces:
 
 - **Simulation** — launches PyroWISE nowcast, scenario and replay runs; live + fallback perimeter rendering; arrival-time layers; QGIS-ready SHP perimeter export.
 - **3D Map** — loads the same run bundle into Cesium terrain; 2D streaming, final artefacts and 3D playback share one timing contract.
@@ -325,7 +327,7 @@ For academic citation, use the entry in [CITATION.cff](CITATION.cff) (GitHub ren
 
 ## Working with PyroWISE
 
-- **As open source** — the engine is **AGPL-3.0**. You may self-host and modify it under those terms, including AGPL's network-copyleft obligation to offer your modified source to users you serve it to over a network.
+- **As open source** — the engine is **AGPL-3.0**. You may self-host and modify it under those terms, including AGPL's network-copyleft obligation to offer your modified source to users you serve it to over a network. ⚠ The repository is not public yet, so this route currently begins by asking us for the source rather than by cloning it — see [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md#-current-status-of-the-engine-source--read-this-first).
 - **Under a commercial license** — for operators who can't adopt AGPL's copyleft, a non-copyleft commercial license of the same engine is available. Contact `sales@infordata.it`.
 - **Operationally** — as the hosted TerraWise platform (SaaS, with support and site-specific calibration). Contact `sales@infordata.it`.
 - **Scientifically** — open an issue or a PR on this repository to discuss the model, the calibration cohort, the validation protocol, methodology questions, or a paper collaboration.
@@ -335,7 +337,7 @@ For academic citation, use the entry in [CITATION.cff](CITATION.cff) (GitHub ren
 
 ## Why open-core
 
-PyroWISE matters most when it is *correct*. Correctness needs the scientific community — peer review, independent validation, paper collaboration, an open benchmark protocol. So the science is open, and so is the engine itself: the source is **AGPL-3.0**, the methodology, the protocol, the published findings (including the negative ones) and the citation are all public.
+PyroWISE matters most when it is *correct*. Correctness needs the scientific community — peer review, independent validation, paper collaboration, an open benchmark protocol. So the science is open: the methodology, the protocol, the published findings (including the negative ones) and the citation are all public, and the engine is licensed **AGPL-3.0** rather than held as a black box.
 
 PyroWISE also matters because someone has to invest in keeping it running, calibrated and trustworthy at operational quality across many sites. That investment is the commercial side — a non-copyleft license for operators who can't adopt AGPL, the hosted service with its SLA and support, and the site-specific numeric calibration tables. The engine *source* stays open; what is sold is the license flexibility, the operations, and the calibration around it.
 

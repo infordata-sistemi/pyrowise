@@ -10,17 +10,26 @@ authors:
 repository-code: "https://github.com/infordata-sistemi/pyrowise"
 url: "https://github.com/infordata-sistemi/pyrowise"
 abstract: >
-  PyroWISE is a wildfire-spread simulation engine combining the Rothermel
-  surface-fire-spread model (Rothermel, 1972) with Huygens-wavefront
-  perimeter propagation (Anderson et al., 1982; Finney, 1998), calibrated
-  for the cross-border Karst region of Italy and Slovenia. It is the
-  simulation core of the TerraWise territorial-emergency platform and the
-  Karst Firewall 5.0 EU Interreg project (ITA-SI0600146, 2024–2027).
+  PyroWISE is a wildfire-spread simulation engine implementing the Canadian
+  Forest Fire Danger Rating System science stack — the Fire Weather Index
+  System (Van Wagner, 1987) and the Fire Behavior Prediction System
+  (Forestry Canada Fire Danger Group, 1992) — with elliptical Huygens
+  wavefront perimeter propagation (Richards, 1990; Anderson et al., 1982;
+  Tymstra et al., 2010) and a quasi-static eikonal arrival-time kernel. A
+  Rothermel/FBFM40 spread provider (Rothermel, 1972; Scott & Burgan, 2005)
+  is available behind the same interface for cross-comparison with US
+  engines. Calibrated for the cross-border Karst region of Italy and
+  Slovenia, it is the simulation core of the TerraWise
+  territorial-emergency platform and the Karst Firewall 5.0 EU Interreg
+  project (ITA-SI0600146, 2024–2027).
 keywords:
   - wildfire
   - fire-spread simulation
-  - Rothermel
+  - CFFDRS
+  - FWI
+  - FBP
   - Huygens propagation
+  - Rothermel
   - digital twin
   - Karst
   - Interreg
