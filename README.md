@@ -309,8 +309,8 @@ See [VALIDATION.md](VALIDATION.md) for the full benchmark protocol: the dataset,
 
 | File | Purpose |
 |---|---|
-| [MODEL.md](MODEL.md) | The science — Rothermel + Huygens + CFFDRS, with citations |
-| [VALIDATION.md](VALIDATION.md) | The open benchmark protocol + the honesty framing |
+| [MODEL.md](MODEL.md) | The science — CFFDRS (FWI + FBP) + Richards/Huygens, the two kernels, the provider seam, AI augmentation, with citations |
+| [VALIDATION.md](VALIDATION.md) | The open benchmark protocol, the pre-registration discipline, the three levels of validation + the honesty framing |
 | [OPEN_VS_COMMERCIAL.md](OPEN_VS_COMMERCIAL.md) | **The explicit boundary — AGPL-3.0 engine + open methods, with a commercial license & SaaS** |
 | [PUBLICATIONS.md](PUBLICATIONS.md) | Companion papers + how to cite |
 | [CITATION.cff](CITATION.cff) | Machine-readable citation metadata |
