@@ -74,7 +74,7 @@ Cohort IoU is the headline, but it is the *weakest* of the three layers, and two
 | Level | What it tests | What it caught that the level above missed |
 |---|---|---|
 | **Cohort IoU + secondary metrics** | Does the whole system reproduce observed fires? | The structural calibration ceiling; the event-level provenance defects |
-| **Component invariants (property-based)** | Do the equations obey their own documented contracts across the whole input domain? | Float-domain defects in the FWI chain that reference-point parity with `cffdrs-R` passed cleanly — including one index raising an exception out of a clamped path, and a scalar/`numpy` pair that silently diverged when only one twin was patched |
+| **Component invariants (property-based)** | Do the equations obey their own documented contracts across the whole input domain? | Float-domain defects in the FWI chain that reference-point parity with `cffdrs-R` passed cleanly — including one index raising an exception out of a clamped path, and a scalar/`numpy` pair that silently diverged when only one twin was patched. A whole-engine audit of the final wave's defect class (partial-domain operations in discarded `np.where` branches) then measured its remaining live instances at **zero** — 29 sites screened, all guarded |
 | **Scale and frame invariance** | Does a result depend on something it physically must not — grid size, window size, timestep? | The AI emulator's frame-relative prior; the Δt sensitivity that fixes production to a per-AOI step |
 
 **The general lesson we would offer anyone validating a fire model:** agreement with a reference implementation at fixture points, and a good cohort IoU, are compatible with a component that is wrong everywhere you did not look. Both of the 2026 defect families were found by asking *"what must be true for all inputs?"* and *"what must this result be independent of?"* — not by adding more events.
@@ -141,4 +141,4 @@ If you are reproducing a number from this page, ask us for the run configuration
 
 ---
 
-<sub>**Last synced with the engine on 2026-09-02**, against finding F-491 and priors v17. Where a figure carries a date or a version, prefer it to the prose around it.</sub>
+<sub>**Last synced with the engine on 2026-09-04**, against finding F-493 and priors v17. Where a figure carries a date or a version, prefer it to the prose around it.</sub>

@@ -152,4 +152,4 @@ The Karst-specific calibration approach and the cross-border benchmark protocol 
 
 ---
 
-<sub>**Last synced with the engine on 2026-09-02**, against finding F-491 and priors v17. This revision corrects the spread-rate section, which had named Rothermel as the production engine; production is Canadian FBP, with Rothermel available as a comparison provider. Where a figure carries a date or a version, prefer it to the prose around it.</sub>
+<sub>**Last synced with the engine on 2026-09-04**, against finding F-493 and priors v17. This revision corrects the spread-rate section, which had named Rothermel as the production engine; production is Canadian FBP, with Rothermel available as a comparison provider. Where a figure carries a date or a version, prefer it to the prose around it.</sub>
